@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'Credit';
+	font-style: normal;
+	font-weight: 500;
+	src: url('/credit.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Vito';
+	font-style: normal;
+	font-weight: normal;
+	src: url('/Vito-Regular.otf') format('opentype');
+}
+@font-face {
+	font-family: 'Vito';
+	font-style: normal;
+	font-weight: bold;
+	src: url('/Vito-Bold.otf') format('opentype');
+}
+
+html, body {
+	height: 100%;
+	width: 100%;
+	background: white;
+	overflow-x: hidden;
+	margin: 0;
+	font-family: "Vito", serif;
+	font-weight: lighter;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.content {
+	height: 100%;
+	width: 100%;
+}
+
+
+.spin {
+	animation: spin 0.3s linear !important;
+}
+@keyframes spin {
+	0% {
+		transform: scaleX(1);
+	}
+	50% {
+		transform: scaleX(0);
+	}
+	0% {
+		transform: scaleX(1);
+	}
+}
