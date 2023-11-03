@@ -19,6 +19,8 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"ethers": "^6.8.1",
+		"ethersjs-nomo-webons": "^0.2.0",
 		"flowbite-svelte": "^0.44.18",
 		"moment": "^2.29.4",
 		"nomo-webon-kit": "^0.1.11",
