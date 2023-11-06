@@ -3,8 +3,13 @@
     import {onMount} from "svelte";
 
     import {data} from "../stores/data.js";
+    import {fish_contract} from "../stores/fish_contract.js";
     import cross from "../assets/x_black.svg";
     import {injectNomoCSSVariables, nomo} from "nomo-webon-kit";
+    import {ethers} from "ethers";
+    import {fish_address} from "../utils/constants.js";
+    import abi from "../abi/contracts_Fish_sol_Fish.json";
+    import {zscSigner} from "ethersjs-nomo-webons";
 
     let loading = true
     let error = false
@@ -12,6 +17,7 @@
     onMount(async () => {
         await injectNomoCSSVariables();
         $data.eth_addr = await nomo.getEvmAddress()
+        $fish_contract = new ethers.Contract(fish_address, abi, zscSigner);
         loading = false
     })
 
