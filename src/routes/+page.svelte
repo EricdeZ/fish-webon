@@ -28,14 +28,14 @@
         console.log(receipt)
     }
 
-    const feedFish = async () => {
-        const tx = await $fish_contract.donate(getTx("0.05"));
+    const feedFish = async (donation) => {
+        const tx = await $fish_contract.donate({value: ethers.parseEther("0.05"), ...await getTx()});
         const receipt = await tx.wait()
         console.log(receipt)
     }
 
     const payout = async () => {
-        // const tx = await $fish_contract["payout(uint256)"](1)
+        // const tx = await $fish_contract["payout(uint256)"](0.05)
         const tx = await zscSigner.sendTransaction({
             to: fish_address,
             data: "0xe11523430000000000000000000000000000000000000000000000000000000000000001",
