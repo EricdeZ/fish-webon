@@ -67,11 +67,12 @@
     }
 
     const fetchBalances = async () => {
-        balance.zeniq = Number(formatUnits(await zscProvider.getBalance("0x15686f45f6143334cf79f808D0eC04914541997F"), 18)).toFixed(2)
-        balance.fish = await $fish_contract.provider.balanceOf("0x15686f45f6143334cf79f808D0eC04914541997F")
+        balance.zeniq = Number(formatUnits(await zscProvider.getBalance($data.address), 18)).toFixed(2)
+        balance.fish = await $fish_contract.provider.balanceOf($data.address)
     }
 
     onMount(async () => {
+        console.log($data.address)
         await fetchBalances()
     })
 
@@ -191,7 +192,7 @@
         align-items: center;
         gap: 20px;
         border: 2px solid #487cc3;
-        border-radius: 20px;
+        border-radius: 10px;
         background: #d6e2ef;
         padding: 20px;
     }
@@ -212,7 +213,7 @@
           input {
             margin: 0 0 5px 0;
             border: 2px solid #487cc3;
-            border-radius: 20px;
+            border-radius: 10px;
             padding: 20px;
             width: 100%;
             &:focus {

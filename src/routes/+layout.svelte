@@ -16,10 +16,10 @@
 
     onMount(async () => {
         await injectNomoCSSVariables();
-        $data.eth_addr = await nomo.getEvmAddress()
+        $data.address = await nomo.getEvmAddress()
         $fish_contract.signer = new ethers.Contract(fish_address, abi, zscSigner);
         $fish_contract.provider = new ethers.Contract(fish_address, abi, zscProvider);
-        $data.is_owner = (await $fish_contract.provider.owner()) === $data.eth_addr
+        $data.is_owner = (await $fish_contract.provider.owner()) === $data.address
         loading = false
     })
 

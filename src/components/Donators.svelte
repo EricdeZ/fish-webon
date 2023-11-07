@@ -3,6 +3,7 @@
     import {formatEther} from "ethers";
     import {onMount} from "svelte";
     import {fish_contract} from "../stores/fish_contract.js";
+    import {data} from "../stores/data.js";
 
     let loading = {
         donations: true,
@@ -12,17 +13,9 @@
     let donations = 0
     let donators = []
 
-    const getDonators = async () => {
-        loading.donators = true
-        donators.push(await $fish_contract.provider.donations(0))
-        donators.push(await $fish_contract.provider.donations(1))
-        donators.push(await $fish_contract.provider.donations(2))
-        loading.donators = false
-    }
-
     onMount(async () => {
         $fish_contract.provider.on("Donate", async () => {
-            donations = formatEther((await $fish_contract.provider.donators("0x15686f45f6143334cf79f808D0eC04914541997F")).amount)
+            donations = formatEther((await $fish_contract.provider.donators($data.address)).amount)
             donators.pop()
             donators.pop()
             donators.pop()
@@ -31,7 +24,7 @@
             donators.push(await $fish_contract.provider.donations(2))
             donators = donators
         });
-        donations = formatEther((await $fish_contract.provider.donators("0x15686f45f6143334cf79f808D0eC04914541997F")).amount)
+        donations = formatEther((await $fish_contract.provider.donators($data.address)).amount)
         loading.donations = false
         donators.push(await $fish_contract.provider.donations(0))
         donators.push(await $fish_contract.provider.donations(1))
@@ -57,7 +50,7 @@
     <div class="container">
         Top Feeders
         {#each donators as donator}
-            {#if donator.name}
+            {#if donator?.name}
                 <div class="donator">
                     <span>{donator.name}</span>
                     <div>
@@ -89,7 +82,7 @@
     align-items: center;
     gap: 20px;
     border: 2px solid #487cc3;
-    border-radius: 20px;
+    border-radius: 10px;
     background: #d6e2ef;
     padding: 20px;
     div {
@@ -111,7 +104,7 @@
     align-items: center;
     gap: 20px;
     border: 2px solid #487cc3;
-    border-radius: 20px;
+    border-radius: 10px;
     background: #d6e2ef;
     padding: 20px;
     div {
