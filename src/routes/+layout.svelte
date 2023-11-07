@@ -8,8 +8,8 @@
     import {injectNomoCSSVariables, nomo} from "nomo-webon-kit";
     import {ethers} from "ethers";
     import {fish_address} from "../utils/constants.js";
-    import abi from "../abi/contracts_Fish_sol_Fish.json";
-    import {zscSigner} from "ethersjs-nomo-webons";
+    import {abi} from "../abi/contracts_Fish_sol_Fish.json";
+    import {zscProvider, zscSigner} from "ethersjs-nomo-webons";
 
     let loading = true
     let error = false
@@ -17,7 +17,9 @@
     onMount(async () => {
         await injectNomoCSSVariables();
         $data.eth_addr = await nomo.getEvmAddress()
-        $fish_contract = new ethers.Contract(fish_address, abi, zscSigner);
+        $fish_contract.signer = new ethers.Contract(fish_address, abi, zscSigner);
+        $fish_contract.provider = new ethers.Contract(fish_address, abi, zscProvider);
+        $data.is_owner = (await $fish_contract.provider.owner()) === $data.eth_addr
         loading = false
     })
 
